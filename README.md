@@ -1,1 +1,1 @@
-# coding-project-template
+# e-Plant Shopping App
