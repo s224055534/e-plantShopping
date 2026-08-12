@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { addItem } from './CartSlice';
+import { useDispatch } from 'react-redux';
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); 
@@ -221,7 +222,7 @@ function ProductList({ onHomeClick }) {
         padding: '15px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignIems: 'center',
+        alignItems: 'center',
         fontSize: '20px',
     }
     const styleObjUl = {
@@ -235,6 +236,7 @@ function ProductList({ onHomeClick }) {
         fontSize: '30px',
         textDecoration: 'none',
     }
+    const dispatch = useDispatch();
 
     const handleHomeClick = (e) => {
         e.preventDefault();
@@ -306,9 +308,10 @@ function ProductList({ onHomeClick }) {
                                 <div className="product-cost">${plant.cost}</div> {/* Display plant cost */}
                                 <button
                                     className="product-button"
-                                    onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
+                                    onClick={() => handleAddToCart(plant)}
+                                    disabled = {addedToCart[plant.name]}
                                 >
-                                    Add to Cart
+                                    {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
                                 </button>
                                 </div>
                             ))}
